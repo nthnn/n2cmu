@@ -15,7 +15,7 @@ jobs:
 
       - uses: acifani/setup-tinygo@v2
         with:
-        tinygo-version: '0.30.0'
+          tinygo-version: '0.30.0'
 
       - name: Install Qrepo
         run: sh -c "$(curl -fsSL https://raw.githubusercontent.com/nthnn/Qrepo/master/support/install.sh)"
