@@ -1,3 +1,8 @@
+/**
+ * @file uart.go
+ * @brief Provides functions for reading data over
+ *        UART (Universal Asynchronous Receiver-Transmitter).
+ */
 package uart
 
 import (
@@ -6,6 +11,10 @@ import (
 	"github.com/nthnn/n2cu/util"
 )
 
+/**
+ * @brief Reads a float32 value from UART.
+ * @return The read float32 value and nil if successful, or 0 and an error if unsuccessful.
+ */
 func ReadFloat32() (float32, error) {
 	var buf []byte
 	count, readErr := machine.Serial.Read(buf)
@@ -17,6 +26,10 @@ func ReadFloat32() (float32, error) {
 	return 0, readErr
 }
 
+/**
+ * @brief Reads a uint16 value from UART.
+ * @return The read uint16 value and nil if successful, or 0 and an error if unsuccessful.
+ */
 func ReadUint16() (uint16, error) {
 	var buf []byte
 	count, readErr := machine.Serial.Read(buf)
@@ -28,6 +41,10 @@ func ReadUint16() (uint16, error) {
 	return 0, readErr
 }
 
+/**
+ * @brief Reads a uint8 value from UART.
+ * @return The read uint8 value and nil if successful, or 0 and an error if unsuccessful.
+ */
 func ReadUint8() (uint8, error) {
 	var buf []byte
 	count, readErr := machine.Serial.Read(buf)
