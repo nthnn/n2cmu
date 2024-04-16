@@ -1,6 +1,7 @@
 /**
  * @file util.go
- * @brief Contains utility functions for converting between float32, uint16, and uint8 and their byte representations.
+ * @brief Contains utility functions for converting
+ *        between float32, uint16, and uint8 and their byte representations.
  */
 
 package util
