@@ -23,3 +23,8 @@ func WriteUint16(u uint16) {
 	buf := util.Uint16ToBytes(u)
 	machine.Serial.Write(buf[:])
 }
+
+func WriteUint8(u uint8) {
+	buf := util.Uint8ToBytes(u)
+	machine.Serial.Write(buf[:])
+}
