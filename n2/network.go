@@ -41,3 +41,19 @@ func CreateNetwork(InputCount, HiddenCount, OutputCount uint8) *NeuralNetwork {
 
 	return network
 }
+
+func (neuralNet *NeuralNetwork) ResetNetwork() {
+	neuralNet.InputCount = 0
+	neuralNet.HiddenCount = 0
+	neuralNet.OutputCount = 0
+
+	neuralNet.HiddenNeuron = nil
+	neuralNet.HiddenBias = nil
+	neuralNet.HiddenGrad = nil
+	neuralNet.HiddenWeights = nil
+
+	neuralNet.OutputNeuron = nil
+	neuralNet.OutputBias = nil
+	neuralNet.OutputGrad = nil
+	neuralNet.OutputWeights = nil
+}
