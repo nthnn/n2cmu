@@ -16,30 +16,30 @@ type NeuralNetwork struct {
 	OutputWeights []float32
 }
 
-func CreateNetwork(InputCount, HiddenCount, OutputCount uint8) *NeuralNetwork {
-	network := &NeuralNetwork{
-		InputCount:    InputCount,
-		HiddenCount:   HiddenCount,
-		OutputCount:   OutputCount,
-		HiddenWeights: make([]float32, InputCount*HiddenCount),
-		OutputWeights: make([]float32, HiddenCount*OutputCount),
-		HiddenBias:    make([]float32, HiddenCount),
-		OutputBias:    make([]float32, OutputCount),
-		HiddenNeuron:  make([]float32, HiddenCount),
-		OutputNeuron:  make([]float32, OutputCount),
-		HiddenGrad:    make([]float32, HiddenCount),
-		OutputGrad:    make([]float32, OutputCount),
+func (neuralNet *NeuralNetwork) InitNetwork(InputCount, HiddenCount, OutputCount uint8) {
+	neuralNet.InputCount = InputCount
+	neuralNet.HiddenCount = HiddenCount
+	neuralNet.OutputCount = OutputCount
+
+	neuralNet.HiddenWeights = make([]float32, InputCount*HiddenCount)
+	neuralNet.OutputWeights = make([]float32, HiddenCount*OutputCount)
+
+	neuralNet.HiddenBias = make([]float32, HiddenCount)
+	neuralNet.OutputBias = make([]float32, OutputCount)
+
+	neuralNet.HiddenNeuron = make([]float32, HiddenCount)
+	neuralNet.OutputNeuron = make([]float32, OutputCount)
+
+	neuralNet.HiddenGrad = make([]float32, HiddenCount)
+	neuralNet.OutputGrad = make([]float32, OutputCount)
+
+	for i := range neuralNet.HiddenWeights {
+		neuralNet.HiddenWeights[i] = 0.5
 	}
 
-	for i := range network.HiddenWeights {
-		network.HiddenWeights[i] = 0.5
+	for i := range neuralNet.OutputWeights {
+		neuralNet.OutputWeights[i] = 0.5
 	}
-
-	for i := range network.OutputWeights {
-		network.OutputWeights[i] = 0.5
-	}
-
-	return network
 }
 
 func (neuralNet *NeuralNetwork) ResetNetwork() {
