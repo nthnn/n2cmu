@@ -1,5 +1,5 @@
 /**
- * @file uart.go
+ * @file reader.go
  * @brief Provides functions for reading data over
  *        UART (Universal Asynchronous Receiver-Transmitter).
  */

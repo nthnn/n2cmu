@@ -1,5 +1,5 @@
 /**
- * @file uart.go
+ * @file writer.go
  * @brief Provides functions for writing data over
  *        UART (Universal Asynchronous Receiver-Transmitter).
  */
