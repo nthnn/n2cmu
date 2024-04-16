@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/nthnn/n2cu/util"
@@ -13,7 +14,6 @@ func TestFloat32ToBytesAndBack(t *testing.T) {
 		{input: 3.14},
 		{input: -123.456},
 		{input: 0.0},
-		{input: -0.0},
 	}
 
 	for _, test := range tests {
@@ -22,6 +22,8 @@ func TestFloat32ToBytesAndBack(t *testing.T) {
 
 		if result != test.input {
 			t.Errorf("Expected %f, but got %f", test.input, result)
+		} else {
+			fmt.Printf("%v = %.3f\r\n", bytes, result)
 		}
 	}
 }
@@ -41,6 +43,8 @@ func TestUint16ToBytesAndBack(t *testing.T) {
 
 		if result != test.input {
 			t.Errorf("Expected %d, but got %d", test.input, result)
+		} else {
+			fmt.Printf("%v = %d\r\n", bytes, result)
 		}
 	}
 }
@@ -59,6 +63,8 @@ func TestUint8ToBytesAndBack(t *testing.T) {
 
 		if result != test.input {
 			t.Errorf("Expected %d, but got %d", test.input, result)
+		} else {
+			fmt.Printf("%v = %d\r\n", bytes, result)
 		}
 	}
 }
