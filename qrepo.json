@@ -2,7 +2,7 @@
 	"name": "n2cu",
 	"author": "Nathanne Isip",
 	"version": "v0.0.1",
-	"description": "Neural Network Coprocessing Microcontroller Unit",
+	"description": "Neural Network Coprocessing Microcontroller Unit (via UART) for STM32F103C8T6 Bluepill written in TinyGo",
 	"git": "https://github.com/nthnn/n2cu",
 	"scripts": {
 		"build": [
