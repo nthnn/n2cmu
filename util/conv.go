@@ -1,5 +1,5 @@
 /**
- * @file util.go
+ * @file conv.go
  * @brief Contains utility functions for converting
  *        between float32, uint16, and uint8 and their byte representations.
  */
