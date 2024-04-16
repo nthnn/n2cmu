@@ -1,25 +1,13 @@
 package util
 
-import (
-	"math"
-)
+import "unsafe"
 
 func Float32ToBytes(f float32) [4]byte {
-	var buf [4]byte
-	bits := math.Float32bits(f)
-
-	for i := 0; i < 4; i++ {
-		buf[i] = byte(bits >> uint(24-8*i))
-	}
-
-	return buf
+	bits := *(*[4]byte)(unsafe.Pointer(&f))
+	return bits
 }
 
 func BytesToFloat32(buf [4]byte) float32 {
-	var bits uint32
-	for i := 0; i < 4; i++ {
-		bits |= uint32(buf[i]) << uint(24-8*i)
-	}
-
-	return math.Float32frombits(bits)
+	bits := *(*uint32)(unsafe.Pointer(&buf))
+	return *(*float32)(unsafe.Pointer(&bits))
 }
