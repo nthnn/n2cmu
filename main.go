@@ -14,7 +14,9 @@ func test() {
 	trainingData := [][]float32{{0, 0}, {0, 1}, {1, 0}, {1, 1}}
 	expectedOutput := []float32{0, 0, 0, 1}
 
-	network := n2.CreateNetwork(2, 2, 1)
+	var network n2.NeuralNetwork
+	network.InitNetwork(2, 2, 1)
+
 	for i := 0; i < 4000; i++ {
 		dataIndex := i % 4
 		network.Train(trainingData[dataIndex], []float32{expectedOutput[dataIndex]}, 1.0)
@@ -34,6 +36,7 @@ func main() {
 
 	for machine.Serial.Buffered() > 0 {
 		command, _ := machine.Serial.ReadByte()
+
 		switch command {
 		case N2CMU_PROC_HANDSHAKE:
 			uart.WriteOk()
@@ -43,6 +46,29 @@ func main() {
 			machine.CPUReset()
 			uart.WriteOk()
 
+			break
+
+		case N2CMU_NET_CREATE:
+			inputCount, err := uart.ReadUint8()
+			if err != nil {
+				uart.WriteError()
+				continue
+			}
+
+			hiddenCount, err := uart.ReadUint8()
+			if err != nil {
+				uart.WriteError()
+				continue
+			}
+
+			outputCount, err := uart.ReadUint8()
+			if err != nil {
+				uart.WriteError()
+				continue
+			}
+
+			network.InitNetwork(inputCount, hiddenCount, outputCount)
+			uart.WriteOk()
 			break
 
 		case N2CMU_NET_RESET:
