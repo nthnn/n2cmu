@@ -1,0 +1,16 @@
+{
+	"name": "n2cu",
+	"author": "Nathanne Isip",
+	"version": "v0.0.1",
+	"description": "Neural Network Coprocessing Microcontroller Unit",
+	"git": "https://github.com/nthnn/n2cu",
+	"scripts": {
+		"build": [
+			"mkdir -p dist",
+			"tinygo build -size=full -opt=z -no-debug -scheduler=none -p=4 -target=bluepill -o dist/n2cu.elf"
+		],
+		"flash": [
+			"tinygo flash -size=full -opt=z -no-debug -scheduler=none -p=4 -target=bluepill"
+		]
+	}
+}
