@@ -11,6 +11,10 @@
 		],
 		"flash": [
 			"tinygo flash -size=full -opt=z -no-debug -scheduler=none -p=4 -target=bluepill"
+		],
+		"test": [
+			"go test -v conv_test.go",
+			"go test -v n2_test.go"
 		]
 	}
 }
