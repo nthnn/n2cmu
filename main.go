@@ -4,6 +4,7 @@ import (
 	"machine"
 
 	"github.com/nthnn/n2cu/n2"
+	"github.com/nthnn/n2cu/uart"
 	"github.com/nthnn/n2cu/util"
 )
 
@@ -29,17 +30,41 @@ func test() {
 
 func main() {
 	var network n2.NeuralNetwork
+	var epoch uint16 = 0
 
 	for machine.Serial.Buffered() > 0 {
 		command, _ := machine.Serial.ReadByte()
 		switch command {
 		case N2CMU_PROC_HANDSHAKE:
-			machine.Serial.WriteByte(0x01)
+			uart.WriteOk()
+			break
+
+		case N2CMU_PROC_CPU_RESET:
+			machine.CPUReset()
+			uart.WriteOk()
+
 			break
 
 		case N2CMU_NET_RESET:
 			network.ResetNetwork()
-			machine.Serial.WriteByte(0x01)
+			uart.WriteOk()
+
+			break
+
+		case N2CMU_SET_EPOCH_COUNT:
+			if num, err := uart.ReadUint16(); err != nil {
+				epoch = num
+				uart.WriteOk()
+			} else {
+				uart.WriteError()
+			}
+
+			break
+
+		case N2CMU_GET_EPOCH_COUNT:
+			buf := util.Uint16ToBytes(epoch)
+			machine.Serial.Write(buf[:])
+
 			break
 		}
 	}
