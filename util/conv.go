@@ -64,23 +64,3 @@ func BytesToUint16(buf [2]byte) uint16 {
 	bits := *(*uint32)(unsafe.Pointer(&buf))
 	return *(*uint16)(unsafe.Pointer(&bits))
 }
-
-/**
- * @brief Converts a uint8 value to its byte representation.
- * @param u The uint8 value to convert.
- * @return The byte representation of the uint8 value.
- */
-func Uint8ToBytes(u uint8) [1]byte {
-	bits := *(*[1]byte)(unsafe.Pointer(&u))
-	return bits
-}
-
-/**
- * @brief Converts a byte representation to a uint8 value.
- * @param buf The byte representation to convert.
- * @return The uint8 value converted from the byte representation.
- */
-func BytesToUint8(buf [1]byte) uint8 {
-	bits := *(*uint32)(unsafe.Pointer(&buf))
-	return *(*uint8)(unsafe.Pointer(&bits))
-}
