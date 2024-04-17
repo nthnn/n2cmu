@@ -49,26 +49,6 @@ func TestUint16ToBytesAndBack(t *testing.T) {
 	}
 }
 
-func TestUint8ToBytesAndBack(t *testing.T) {
-	tests := []struct {
-		input uint8
-	}{
-		{input: 255},
-		{input: 0},
-	}
-
-	for _, test := range tests {
-		bytes := util.Uint8ToBytes(test.input)
-		result := util.BytesToUint8(bytes)
-
-		if result != test.input {
-			t.Errorf("Expected %d, but got %d", test.input, result)
-		} else {
-			fmt.Printf("%v = %d\r\n", bytes, result)
-		}
-	}
-}
-
 func BenchmarkFloat32ToBytes(b *testing.B) {
 	input := float32(3.14)
 	for i := 0; i < b.N; i++ {
@@ -94,19 +74,5 @@ func BenchmarkBytesToUint16(b *testing.B) {
 	input := [2]byte{1, 2}
 	for i := 0; i < b.N; i++ {
 		_ = util.BytesToUint16(input)
-	}
-}
-
-func BenchmarkUint8ToBytes(b *testing.B) {
-	input := uint8(100)
-	for i := 0; i < b.N; i++ {
-		_ = util.Uint8ToBytes(input)
-	}
-}
-
-func BenchmarkBytesToUint8(b *testing.B) {
-	input := [1]byte{1}
-	for i := 0; i < b.N; i++ {
-		_ = util.BytesToUint8(input)
 	}
 }
