@@ -65,6 +65,5 @@ func WriteUint16(u uint16) {
  * @param u The uint8 value to write.
  */
 func WriteUint8(u uint8) {
-	buf := util.Uint8ToBytes(u)
-	machine.Serial.Write(buf[:])
+	machine.Serial.WriteByte(byte(u))
 }

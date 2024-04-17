@@ -33,14 +33,18 @@ import (
  * @return The read float32 value and nil if successful, or 0 and an error if unsuccessful.
  */
 func ReadFloat32() (float32, error) {
-	var buf []byte
-	count, readErr := machine.Serial.Read(buf)
+	var buf [4]byte
+	for i := uint8(0); i < uint8(4); i++ {
+		value, err := machine.Serial.ReadByte()
 
-	if count == 4 && readErr != nil {
-		return util.BytesToFloat32([4]byte(buf)), nil
+		if err != nil {
+			return float32(0.0), err
+		}
+
+		buf[i] = value
 	}
 
-	return 0, readErr
+	return util.BytesToFloat32(buf), nil
 }
 
 /**
@@ -48,14 +52,18 @@ func ReadFloat32() (float32, error) {
  * @return The read uint16 value and nil if successful, or 0 and an error if unsuccessful.
  */
 func ReadUint16() (uint16, error) {
-	var buf []byte
-	count, readErr := machine.Serial.Read(buf)
+	var buf [2]byte
+	for i := uint8(0); i < uint8(2); i++ {
+		value, err := machine.Serial.ReadByte()
 
-	if count == 2 && readErr != nil {
-		return util.BytesToUint16([2]byte(buf)), nil
+		if err != nil {
+			return uint16(0), err
+		}
+
+		buf[i] = value
 	}
 
-	return 0, readErr
+	return util.BytesToUint16(buf), nil
 }
 
 /**
@@ -63,12 +71,10 @@ func ReadUint16() (uint16, error) {
  * @return The read uint8 value and nil if successful, or 0 and an error if unsuccessful.
  */
 func ReadUint8() (uint8, error) {
-	var buf []byte
-	count, readErr := machine.Serial.Read(buf)
-
-	if count == 1 && readErr != nil {
-		return util.BytesToUint8([1]byte(buf)), nil
+	value, err := machine.Serial.ReadByte()
+	if err != nil {
+		return uint8(0), err
 	}
 
-	return 0, readErr
+	return value, nil
 }
