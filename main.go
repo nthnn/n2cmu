@@ -26,13 +26,15 @@ import (
 )
 
 func main() {
-	machine.UART1.SetBaudRate(2000000)
-
 	var network n2.NeuralNetwork
 	var epoch uint16 = 0
 
-	for machine.Serial.Buffered() > 0 {
-		command, _ := machine.Serial.ReadByte()
+	machine.UART1.SetBaudRate(115200)
+	for {
+		command, error := machine.Serial.ReadByte()
+		if error != nil {
+			continue
+		}
 
 		switch command {
 		case N2CMU_PROC_HANDSHAKE:
