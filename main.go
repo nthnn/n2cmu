@@ -43,8 +43,6 @@ func main() {
 
 		case N2CMU_PROC_CPU_RESET:
 			machine.CPUReset()
-			uart.WriteOk()
-
 			break
 
 		case N2CMU_NET_CREATE:
