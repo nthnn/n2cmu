@@ -7,10 +7,10 @@
 	"scripts": {
 		"build": [
 			"mkdir -p dist",
-			"tinygo build -size=full -opt=z -no-debug -scheduler=none -p=4 -target=bluepill -o dist/n2cu.elf"
+			"tinygo build -size=full -target=bluepill -o dist/n2cu.elf"
 		],
 		"flash": [
-			"tinygo flash -size=full -opt=z -no-debug -scheduler=none -p=4 -target=bluepill"
+			"tinygo flash -size=full -target=bluepill"
 		],
 		"test": [
 			"go test -v conv_test.go",
