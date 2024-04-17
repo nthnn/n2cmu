@@ -32,14 +32,14 @@ import (
  * @brief Signals an "OK" message over UART.
  */
 func WriteOk() {
-	machine.Serial.WriteByte(0x00)
+	machine.Serial.WriteByte(0x01)
 }
 
 /**
  * @brief Signals an "Error" message over UART.
  */
 func WriteError() {
-	machine.Serial.WriteByte(0x01)
+	machine.Serial.WriteByte(0x00)
 }
 
 /**
