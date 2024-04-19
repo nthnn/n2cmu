@@ -51,18 +51,18 @@ func main() {
 			outputCount := uart.ReadUint8()
 
 			network.InitNetwork(inputCount, hiddenCount, outputCount)
-			uart.WriteOk()
 			break
 
 		case N2CMU_NET_RESET:
 			network.ResetNetwork()
-			uart.WriteOk()
+			break
 
+		case N2CMU_SET_INPUT_COUNT:
+			network.InputCount = uart.ReadUint8()
 			break
 
 		case N2CMU_SET_EPOCH_COUNT:
 			epoch = uart.ReadUint16()
-			uart.WriteOk()
 			break
 
 		case N2CMU_GET_EPOCH_COUNT:
