@@ -90,6 +90,7 @@ func main() {
 
 		case N2CMU_SET_INPUT_COUNT:
 			network.InputCount = uart.ReadUint8()
+			network.InitMatrix()
 			break
 
 		case N2CMU_GET_INPUT_COUNT:
@@ -98,6 +99,7 @@ func main() {
 
 		case N2CMU_SET_HIDDEN_COUNT:
 			network.HiddenCount = uart.ReadUint8()
+			network.InitMatrix()
 			break
 
 		case N2CMU_GET_HIDDEN_COUNT:
@@ -106,6 +108,7 @@ func main() {
 
 		case N2CMU_SET_OUTPUT_COUNT:
 			network.OutputCount = uart.ReadUint8()
+			network.InitMatrix()
 			break
 
 		case N2CMU_GET_OUTPUT_COUNT:
