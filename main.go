@@ -22,7 +22,6 @@ import (
 
 	"github.com/nthnn/n2cu/n2"
 	"github.com/nthnn/n2cu/uart"
-	"github.com/nthnn/n2cu/util"
 )
 
 func main() {
@@ -66,8 +65,7 @@ func main() {
 			break
 
 		case N2CMU_GET_EPOCH_COUNT:
-			buf := util.Uint16ToBytes(epoch)
-			machine.Serial.Write([]byte{buf[0], buf[1]})
+			uart.WriteUint16(epoch)
 			break
 		}
 	}
