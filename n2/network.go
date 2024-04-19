@@ -42,6 +42,38 @@ type NeuralNetwork struct {
 }
 
 /**
+ * @brief Initializes the matrix data for neural network with the previous specifications.
+ */
+func (neuralNet *NeuralNetwork) InitMatrix() {
+	neuralNet.HiddenWeights = make(
+		[]float32,
+		neuralNet.InputCount*neuralNet.HiddenCount,
+	)
+
+	neuralNet.OutputWeights = make(
+		[]float32,
+		neuralNet.HiddenCount*neuralNet.OutputCount,
+	)
+
+	neuralNet.HiddenBias = make([]float32, neuralNet.HiddenCount)
+	neuralNet.OutputBias = make([]float32, neuralNet.OutputCount)
+
+	neuralNet.HiddenNeuron = make([]float32, neuralNet.HiddenCount)
+	neuralNet.OutputNeuron = make([]float32, neuralNet.OutputCount)
+
+	neuralNet.HiddenGrad = make([]float32, neuralNet.HiddenCount)
+	neuralNet.OutputGrad = make([]float32, neuralNet.OutputCount)
+
+	for i := range neuralNet.HiddenWeights {
+		neuralNet.HiddenWeights[i] = 0.5
+	}
+
+	for i := range neuralNet.OutputWeights {
+		neuralNet.OutputWeights[i] = 0.5
+	}
+}
+
+/**
  * @brief Initializes the neural network with specified counts for input, hidden, and output neurons.
  * @param InputCount Number of input neurons.
  * @param HiddenCount Number of hidden neurons.
@@ -52,25 +84,7 @@ func (neuralNet *NeuralNetwork) InitNetwork(InputCount, HiddenCount, OutputCount
 	neuralNet.HiddenCount = HiddenCount
 	neuralNet.OutputCount = OutputCount
 
-	neuralNet.HiddenWeights = make([]float32, InputCount*HiddenCount)
-	neuralNet.OutputWeights = make([]float32, HiddenCount*OutputCount)
-
-	neuralNet.HiddenBias = make([]float32, HiddenCount)
-	neuralNet.OutputBias = make([]float32, OutputCount)
-
-	neuralNet.HiddenNeuron = make([]float32, HiddenCount)
-	neuralNet.OutputNeuron = make([]float32, OutputCount)
-
-	neuralNet.HiddenGrad = make([]float32, HiddenCount)
-	neuralNet.OutputGrad = make([]float32, OutputCount)
-
-	for i := range neuralNet.HiddenWeights {
-		neuralNet.HiddenWeights[i] = 0.5
-	}
-
-	for i := range neuralNet.OutputWeights {
-		neuralNet.OutputWeights[i] = 0.5
-	}
+	neuralNet.InitMatrix()
 }
 
 /**
