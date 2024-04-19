@@ -28,7 +28,7 @@ func main() {
 	var network n2.NeuralNetwork
 	var epoch uint16 = 0
 
-	machine.UART1.SetBaudRate(115200)
+	machine.UART1.SetBaudRate(31250)
 	for {
 		command, error := machine.Serial.ReadByte()
 		if error != nil {
