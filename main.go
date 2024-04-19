@@ -88,6 +88,20 @@ func main() {
 			uart.WriteOk()
 			break
 
+		case N2CMU_NET_INFER:
+			input := make([]float32, network.InputCount)
+			for j := 0; j < int(network.InputCount); j++ {
+				input[j] = uart.ReadFloat32()
+			}
+
+			output := network.Infer(input)
+			for i := 0; i < int(network.OutputCount); i++ {
+				uart.WriteFloat32(output[i])
+			}
+
+			uart.WriteOk()
+			break
+
 		case N2CMU_SET_INPUT_COUNT:
 			network.InputCount = uart.ReadUint8()
 			network.InitMatrix()
