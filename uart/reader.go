@@ -33,21 +33,27 @@ import (
  * @return The read float32 value and nil if successful, or 0 and an error if unsuccessful.
  */
 func ReadFloat32() (float32, error) {
+	var err error
 	buf := []byte{0, 0, 0, 0}
-	num, _ := machine.Serial.Read(buf)
 
-	for num == 0 {
-		num, _ = machine.Serial.Read(buf)
+	buf[0], err = machine.Serial.ReadByte()
+	for err != nil {
+		buf[0], err = machine.Serial.ReadByte()
 	}
 
-	for i := uint8(0); i < uint8(4); i++ {
-		value, err := machine.Serial.ReadByte()
+	buf[1], err = machine.Serial.ReadByte()
+	for err != nil {
+		buf[1], err = machine.Serial.ReadByte()
+	}
 
-		if err != nil {
-			return float32(0.0), err
-		}
+	buf[2], err = machine.Serial.ReadByte()
+	for err != nil {
+		buf[2], err = machine.Serial.ReadByte()
+	}
 
-		buf[i] = value
+	buf[3], err = machine.Serial.ReadByte()
+	for err != nil {
+		buf[3], err = machine.Serial.ReadByte()
 	}
 
 	return util.BytesToFloat32([4]byte(buf)), nil
@@ -57,38 +63,34 @@ func ReadFloat32() (float32, error) {
  * @brief Reads a uint16 value from UART.
  * @return The read uint16 value and nil if successful, or 0 and an error if unsuccessful.
  */
-func ReadUint16() (uint16, error) {
+func ReadUint16() uint16 {
+	var err error
 	buf := []byte{0, 0}
-	num, _ := machine.Serial.Read(buf)
 
-	for num == 0 {
-		num, _ = machine.Serial.Read(buf)
+	buf[0], err = machine.Serial.ReadByte()
+	for err != nil {
+		buf[0], err = machine.Serial.ReadByte()
 	}
 
-	for i := uint8(0); i < uint8(2); i++ {
-		value, err := machine.Serial.ReadByte()
-
-		if err != nil {
-			return uint16(0), err
-		}
-
-		buf[i] = value
+	buf[1], err = machine.Serial.ReadByte()
+	for err != nil {
+		buf[1], err = machine.Serial.ReadByte()
 	}
 
-	return util.BytesToUint16([2]byte(buf)), nil
+	return util.BytesToUint16([2]byte(buf))
 }
 
 /**
  * @brief Reads a uint8 value from UART.
  * @return The read uint8 value and nil if successful, or 0 and an error if unsuccessful.
  */
-func ReadUint8() (uint8, error) {
+func ReadUint8() uint8 {
 	buf := []byte{0}
-	num, err := machine.Serial.Read(buf)
+	_, err := machine.Serial.Read(buf)
 
-	for num == 0 {
-		num, err = machine.Serial.Read(buf)
+	for err != nil {
+		_, err = machine.Serial.Read(buf)
 	}
 
-	return buf[0], err
+	return buf[0]
 }
