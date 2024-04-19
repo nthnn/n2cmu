@@ -85,11 +85,12 @@ func ReadUint16() uint16 {
  * @return The read uint8 value and nil if successful, or 0 and an error if unsuccessful.
  */
 func ReadUint8() uint8 {
+	var err error
 	buf := []byte{0}
-	_, err := machine.Serial.Read(buf)
 
+	buf[0], err = machine.Serial.ReadByte()
 	for err != nil {
-		_, err = machine.Serial.Read(buf)
+		buf[0], err = machine.Serial.ReadByte()
 	}
 
 	return buf[0]
