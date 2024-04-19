@@ -32,7 +32,7 @@ import (
  * @brief Reads a float32 value from UART.
  * @return The read float32 value and nil if successful, or 0 and an error if unsuccessful.
  */
-func ReadFloat32() (float32, error) {
+func ReadFloat32() float32 {
 	var err error
 	buf := []byte{0, 0, 0, 0}
 
@@ -56,7 +56,7 @@ func ReadFloat32() (float32, error) {
 		buf[3], err = machine.Serial.ReadByte()
 	}
 
-	return util.BytesToFloat32([4]byte(buf)), nil
+	return util.BytesToFloat32([4]byte(buf))
 }
 
 /**
