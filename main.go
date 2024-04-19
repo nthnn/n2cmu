@@ -56,6 +56,38 @@ func main() {
 			network.ResetNetwork()
 			break
 
+		case N2CMU_NET_TRAIN:
+			dataSize := int(uart.ReadUint16())
+			dataSet := make([][]float32, dataSize)
+
+			for j := 0; j < dataSize; j++ {
+				data := make([]float32, network.InputCount)
+				for k := 0; k < int(network.InputCount); k++ {
+					data[k] = uart.ReadFloat32()
+				}
+
+				dataSet[j] = data
+			}
+
+			output := make([][]float32, dataSize)
+			for j := 0; j < dataSize; j++ {
+				data := make([]float32, network.OutputCount)
+				for k := 0; k < int(network.OutputCount); k++ {
+					data[k] = uart.ReadFloat32()
+				}
+
+				output[j] = data
+			}
+
+			learningRate := uart.ReadFloat32()
+			for i := 0; i < int(epoch); i++ {
+				dataIndex := i % dataSize
+				network.Train(dataSet[dataIndex], output[dataIndex], learningRate)
+			}
+
+			uart.WriteOk()
+			break
+
 		case N2CMU_SET_INPUT_COUNT:
 			network.InputCount = uart.ReadUint8()
 			break
