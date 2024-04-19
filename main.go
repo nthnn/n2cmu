@@ -29,9 +29,7 @@ func main() {
 	var network n2.NeuralNetwork
 	var epoch uint16 = 0
 
-	machine.InitSerial()
 	machine.UART1.SetBaudRate(115200)
-
 	for {
 		command, error := machine.Serial.ReadByte()
 		if error != nil {
@@ -48,23 +46,9 @@ func main() {
 			break
 
 		case N2CMU_NET_CREATE:
-			inputCount, err := uart.ReadUint8()
-			if err != nil {
-				uart.WriteError()
-				continue
-			}
-
-			hiddenCount, err := uart.ReadUint8()
-			if err != nil {
-				uart.WriteError()
-				continue
-			}
-
-			outputCount, err := uart.ReadUint8()
-			if err != nil {
-				uart.WriteError()
-				continue
-			}
+			inputCount := uart.ReadUint8()
+			hiddenCount := uart.ReadUint8()
+			outputCount := uart.ReadUint8()
 
 			network.InitNetwork(inputCount, hiddenCount, outputCount)
 			uart.WriteOk()
@@ -77,19 +61,13 @@ func main() {
 			break
 
 		case N2CMU_SET_EPOCH_COUNT:
-			if num, err := uart.ReadUint16(); err != nil {
-				epoch = num
-				uart.WriteOk()
-			} else {
-				uart.WriteError()
-			}
-
+			epoch = uart.ReadUint16()
+			uart.WriteOk()
 			break
 
 		case N2CMU_GET_EPOCH_COUNT:
 			buf := util.Uint16ToBytes(epoch)
-			machine.Serial.Write(buf[:])
-
+			machine.Serial.Write([]byte{buf[0], buf[1]})
 			break
 		}
 	}
