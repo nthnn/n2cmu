@@ -171,6 +171,20 @@ func main() {
 			}
 			break
 
+		case N2CMU_SET_OUTPUT_WEIGHTS:
+			for i := 0; i < len(network.OutputWeights); i++ {
+				network.OutputWeights[i] = uart.ReadFloat32()
+			}
+
+			uart.WriteOk()
+			break
+
+		case N2CMU_GET_OUTPUT_WEIGHTS:
+			for i := 0; i < len(network.OutputWeights); i++ {
+				uart.WriteFloat32(network.OutputWeights[i])
+			}
+			break
+
 		case N2CMU_SET_EPOCH_COUNT:
 			epoch = uart.ReadUint16()
 			break
