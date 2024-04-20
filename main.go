@@ -227,6 +227,20 @@ func main() {
 			}
 			break
 
+		case N2CMU_SET_OUTPUT_GRAD:
+			for i := 0; i < int(network.OutputCount); i++ {
+				network.OutputGrad[i] = uart.ReadFloat32()
+			}
+
+			uart.WriteOk()
+			break
+
+		case N2CMU_GET_OUTPUT_GRAD:
+			for i := 0; i < int(network.OutputCount); i++ {
+				uart.WriteFloat32(network.OutputGrad[i])
+			}
+			break
+
 		case N2CMU_SET_EPOCH_COUNT:
 			epoch = uart.ReadUint16()
 			break
