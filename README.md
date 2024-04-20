@@ -1,5 +1,9 @@
 # N2CMU (Neural Network Coprocessing Microcontroller Unit)
 
+![Go Test CI](https://github.com/nthnn/n2cmu/actions/workflows/go_tests.yml/badge.svg)
+![TinyGo Build](https://github.com/nthnn/n2cmu/actions/workflows/tinygo_build.yml/badge.svg)
+[![License: GNU GPL v3.0](https://img.shields.io/badge/License-GNU%20GPL%20v3.0-yellow.svg)](https://github.com/nthnn/n2cmu/blob/main/LICENSE)
+
 N2CMU is a project aimed at implementing a neural network coprocessing microcontroller unit (MCU) for STM32F103C8T6 Bluepill development board using the TinyGo (Go programming language for embedded systems). This MCU enables offloading feedforward neural network computations to a dedicated hardware unit, allowing for efficient and low-power feedforward neural network training and inference on small hardware embedded systems.
 
 ## Features
