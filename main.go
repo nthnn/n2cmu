@@ -143,6 +143,20 @@ func main() {
 			}
 			break
 
+		case N2CMU_SET_OUTPUT_NEURON:
+			for i := 0; i < int(network.OutputCount); i++ {
+				network.OutputNeuron[i] = uart.ReadFloat32()
+			}
+
+			uart.WriteOk()
+			break
+
+		case N2CMU_GET_OUTPUT_NEURON:
+			for i := 0; i < int(network.OutputCount); i++ {
+				uart.WriteFloat32(network.OutputNeuron[i])
+			}
+			break
+
 		case N2CMU_SET_EPOCH_COUNT:
 			epoch = uart.ReadUint16()
 			break
