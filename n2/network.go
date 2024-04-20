@@ -21,6 +21,8 @@
  */
 package n2
 
+import "math/rand"
+
 /**
  * @struct NeuralNetwork
  * @brief Represents a feedforward neural network.
@@ -65,11 +67,11 @@ func (neuralNet *NeuralNetwork) InitMatrix() {
 	neuralNet.OutputGrad = make([]float32, neuralNet.OutputCount)
 
 	for i := range neuralNet.HiddenWeights {
-		neuralNet.HiddenWeights[i] = 0.5
+		neuralNet.HiddenWeights[i] = rand.Float32()
 	}
 
 	for i := range neuralNet.OutputWeights {
-		neuralNet.OutputWeights[i] = 0.5
+		neuralNet.OutputWeights[i] = rand.Float32()
 	}
 }
 
