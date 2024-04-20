@@ -28,6 +28,10 @@ func main() {
 	var network n2.NeuralNetwork
 	var epoch uint16 = 0
 
+	led := machine.PC13
+	led.Configure(machine.PinConfig{Mode: machine.PinOutput})
+	led.High()
+
 	machine.UART1.SetBaudRate(31250)
 	for {
 		command, error := machine.Serial.ReadByte()
@@ -45,18 +49,26 @@ func main() {
 			break
 
 		case N2CMU_NET_CREATE:
+			led.Low()
+
 			inputCount := uart.ReadUint8()
 			hiddenCount := uart.ReadUint8()
 			outputCount := uart.ReadUint8()
 
 			network.InitNetwork(inputCount, hiddenCount, outputCount)
+
+			led.High()
 			break
 
 		case N2CMU_NET_RESET:
+			led.Low()
 			network.ResetNetwork()
+			led.High()
 			break
 
 		case N2CMU_NET_TRAIN:
+			led.Low()
+
 			dataSize := int(uart.ReadUint16())
 			dataSet := make([][]float32, dataSize)
 
@@ -86,9 +98,12 @@ func main() {
 			}
 
 			uart.WriteOk()
+			led.High()
 			break
 
 		case N2CMU_NET_INFER:
+			led.Low()
+
 			input := make([]float32, network.InputCount)
 			for j := 0; j < int(network.InputCount); j++ {
 				input[j] = uart.ReadFloat32()
@@ -100,6 +115,7 @@ func main() {
 			}
 
 			uart.WriteOk()
+			led.High()
 			break
 
 		case N2CMU_SET_INPUT_COUNT:
