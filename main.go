@@ -213,6 +213,20 @@ func main() {
 			}
 			break
 
+		case N2CMU_SET_HIDDEN_GRAD:
+			for i := 0; i < int(network.HiddenCount); i++ {
+				network.HiddenGrad[i] = uart.ReadFloat32()
+			}
+
+			uart.WriteOk()
+			break
+
+		case N2CMU_GET_HIDDEN_GRAD:
+			for i := 0; i < int(network.HiddenCount); i++ {
+				uart.WriteFloat32(network.HiddenGrad[i])
+			}
+			break
+
 		case N2CMU_SET_EPOCH_COUNT:
 			epoch = uart.ReadUint16()
 			break
