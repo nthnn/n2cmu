@@ -40,13 +40,13 @@ qrepo run flash
 4. You're now ready to interact with N2CMU and start utilizing its neural network coprocessing capabilities. Follow the example schematic below for Arduino UNO (but other boards will do).
 
 <p align="center">
-    <img alt="N2CMU Example Schematic" src="assets/n2cmu-schematics.png" />
+    <img alt="N2CMU Example Schematic" src="https://github.com/nthnn/n2cmu/blob/main/assets/n2cmu-schematics.png?raw=true" />
 </p>
 
 5. Alternatively, you can manufacture your own Arduino UNO shield for N2CMU. Here's the Gerber file and PDF schematic file for N2CMU shield:
 
-    - [Arduino N2CMU shield PDF schematic](pcb/Arduino-N2CMU-Shield-Schematic.pdf)
-    - [Arduino N2CMU Gerber file](pcb/Arduino-N2CMU-Shield-Gerber.zip)
+    - [Arduino N2CMU shield PDF schematic](https://github.com/nthnn/n2cmu/blob/main/pcb/Arduino-N2CMU-Shield-Schematic.pdf)
+    - [Arduino N2CMU Gerber file](https://github.com/nthnn/n2cmu/blob/main/pcb/Arduino-N2CMU-Shield-Gerber.zip)
 
 6. See [n2cmu-arduino](https://github.com/nthnn/n2cmu-arduino) library for interacting with Arduino-powered boards.
 
